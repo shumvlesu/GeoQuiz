@@ -43,10 +43,10 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Toast messToast = Toast.makeText(QuizActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT);
-                messToast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                messToast.show();
-
+                //Toast messToast = Toast.makeText(QuizActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT);
+                //messToast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                //messToast.show();
+                checkAnswer(true);
             }
         });
 
@@ -54,10 +54,10 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast messToast = Toast.makeText(QuizActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT);
-                messToast.setGravity(Gravity.TOP | Gravity.RIGHT, 0, 0);
-                messToast.show();
-
+                //Toast messToast = Toast.makeText(QuizActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT);
+                //messToast.setGravity(Gravity.TOP | Gravity.RIGHT, 0, 0);
+                //messToast.show();
+                checkAnswer(false);
             }
         });
 
@@ -81,4 +81,16 @@ public class QuizActivity extends AppCompatActivity {
         mQuestionTextView.setText(question);
     }
 
+    //проверка на правильность ответа
+    private void checkAnswer (boolean uuserPressedTrue){
+        boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+        int messageResId = 0;
+
+        if (uuserPressedTrue==answerIsTrue){
+            messageResId = R.string.correct_toast;
+        }else {
+            messageResId = R.string.incorrect_toast;
+        }
+        Toast.makeText(this,messageResId,Toast.LENGTH_SHORT).show();
+    }
 }
