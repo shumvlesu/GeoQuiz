@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ГеоШутка</string>
+    <string name="question_australia">Канберра столица Австралии.</string>
+    <string name="question_oceans">Тихий океан больше, чем Атлантический океан.</string>
+    <string name="question_mideast">Суэцкий канал соединяет Красное море и Индийский океан.</string>
+    <string name="question_africa">Источник реки Нил находится в Египте.</string>
+    <string name="question_americas">Река Амазонка - самая длинная река в Северной и Южной Америке.</string>
+    <string name="question_asia">Озеро Байкал является самым старым и самым глубоким \n пресноводным озером в мире.</string>
+    <string name="next_button">Следующий вопрос</string>
+    <string name="true_button">Правда</string>
+    <string name="false_button">Ложь</string>
+    <string name="correct_toast">Правильно!</string>
+    <string name="incorrect_toast">Неверно!</string>
+</resources>
