@@ -8,6 +8,7 @@
     <string name="question_americas">Река Амазонка - самая длинная река в Северной и Южной Америке.</string>
     <string name="question_asia">Озеро Байкал является самым старым и самым глубоким \n пресноводным озером в мире.</string>
     <string name="next_button">Следующий вопрос</string>
+    <string name="previous_button">Предыдущий вопрос</string>
     <string name="true_button">Правда</string>
     <string name="false_button">Ложь</string>
     <string name="correct_toast">Правильно!</string>
