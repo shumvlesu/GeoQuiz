@@ -30,7 +30,7 @@ public class QuizActivity extends AppCompatActivity {
 
     //Массив в котором хранится состояние блокировки или разблокировки кнопок ответов
     //Если пользователь нажал ответ то кнопка должна быть неактивна.
-    private  boolean[] stateQuestion = new boolean[6];
+    private  boolean[] stateQuestion = new boolean[mQuestionBank.length];
 
     private int mCurrentIndex = 0;
 
