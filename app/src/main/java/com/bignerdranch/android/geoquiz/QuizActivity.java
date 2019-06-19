@@ -30,6 +30,7 @@ public class QuizActivity extends AppCompatActivity {
     private int mCurrentIndex = 0;
 
     private static final String TAG = "QuizActivity";
+    private static final String KEY_INDEX = "index";
 
 
     @Override
@@ -37,6 +38,11 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
+
+        //Если активити был воссоздан после уничтожения, востанавливаем значение что хранилось в mCurrentIndex на тот момент.
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         //int question = mQuestionBank[mCurrentIndex].getTextResId();
@@ -120,6 +126,17 @@ public class QuizActivity extends AppCompatActivity {
         super.onPause();
         Log.d(TAG, "onPause() called");
     }
+
+    //При уничтожении (повороте экрана) сохраняем mCurrentIndex в savedInstanceState
+    //Сохраняются только примитивные типы  и  классы,  реализующие  интерфейс  Serializable  или  Parcelable
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i(TAG, "onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();
