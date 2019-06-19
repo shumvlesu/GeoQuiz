@@ -27,10 +27,16 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_americas, true),
             new Question(R.string.question_asia, true),
     };
+
+    //Массив в котором хранится состояние блокировки или разблокировки кнопок ответов
+    //Если пользователь нажал ответ то кнопка должна быть неактивна.
+    private  boolean[] stateQuestion = new boolean[6];
+
     private int mCurrentIndex = 0;
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+    private static final String KEY_Q = "indexStateQuestion";
 
 
     @Override
@@ -41,7 +47,12 @@ public class QuizActivity extends AppCompatActivity {
 
         //Если активити был воссоздан после уничтожения, востанавливаем значение что хранилось в mCurrentIndex на тот момент.
         if (savedInstanceState != null) {
-            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+           stateQuestion = savedInstanceState.getBooleanArray(KEY_Q);
+           mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }else {
+            for (int i=0; i<stateQuestion.length; i++){
+                stateQuestion[i] = true;
+            }
         }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -59,6 +70,7 @@ public class QuizActivity extends AppCompatActivity {
                 //messToast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
                 //messToast.show();
                 checkAnswer(true);
+
             }
         });
 
@@ -70,6 +82,7 @@ public class QuizActivity extends AppCompatActivity {
                 //messToast.setGravity(Gravity.TOP | Gravity.RIGHT, 0, 0);
                 //messToast.show();
                 checkAnswer(false);
+
             }
         });
 
@@ -97,6 +110,8 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+
+        //При нажатии на надпись (где вопрос написан)
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,6 +149,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putBooleanArray(KEY_Q, stateQuestion);
     }
 
 
@@ -158,6 +174,7 @@ public class QuizActivity extends AppCompatActivity {
     private  void updateQuestion(){
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
+        getButtonState();
     }
 
     //проверка на правильность ответа
@@ -171,5 +188,24 @@ public class QuizActivity extends AppCompatActivity {
             messageResId = R.string.incorrect_toast;
         }
         Toast.makeText(this,messageResId,Toast.LENGTH_SHORT).show();
+        setButtonState();
+        getButtonState();
     }
+
+    //Как только ответ на вопрос получен запрещаем нажимать на кнопку в этом вопросе
+    private void setButtonState() {
+        stateQuestion[mCurrentIndex] = false;
+        //mFalseButton.setClickable(false);
+        //mTrueButton.setClickable(false);
+    }
+
+    private void getButtonState() {
+        //mFalseButton.setClickable(stateQuestion[mCurrentIndex]);
+        //mTrueButton.setClickable(stateQuestion[mCurrentIndex]);
+        mFalseButton.setEnabled(stateQuestion[mCurrentIndex]);
+        mTrueButton.setEnabled(stateQuestion[mCurrentIndex]);
+    }
+
+
+
 }
