@@ -32,6 +32,9 @@ public class QuizActivity extends AppCompatActivity {
     //Если пользователь нажал ответ то кнопка должна быть неактивна.
     private  boolean[] stateQuestion = new boolean[mQuestionBank.length];
 
+    //Счетчик правильных ответов
+    private int correctAnswerCounter = 0;
+
     private int mCurrentIndex = 0;
 
     private static final String TAG = "QuizActivity";
@@ -184,6 +187,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (uuserPressedTrue==answerIsTrue){
             messageResId = R.string.correct_toast;
+            correctAnswerCounter++;
         }else {
             messageResId = R.string.incorrect_toast;
         }
