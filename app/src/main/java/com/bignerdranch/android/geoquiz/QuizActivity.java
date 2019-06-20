@@ -223,9 +223,10 @@ public class QuizActivity extends AppCompatActivity {
         if (questionCounter == 0) {
 
             String fMessage =getResources().getString(R.string.final_message);
-            float procent = mQuestionBank.length*correctAnswerCounter/100;
-            mQuestionTextView.setText(fMessage+" "+Float.toString(procent)+"%");
-            //Toast.makeText(this, fMessage+" "+procent+"%", Toast.LENGTH_LONG).show();
+            int procent = ((correctAnswerCounter*100)/mQuestionBank.length);
+            mQuestionTextView.setText(fMessage+" "+Integer.toString(procent)+"%");
+            Toast.makeText(this, fMessage+" "+Integer.toString(procent)+"%", Toast.LENGTH_LONG).show();
+
         }
     }
 
