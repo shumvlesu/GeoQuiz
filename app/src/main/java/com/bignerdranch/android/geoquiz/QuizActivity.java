@@ -159,7 +159,9 @@ public class QuizActivity extends AppCompatActivity {
     //Сохраняются только примитивные типы  и  классы,  реализующие  интерфейс  Serializable  или  Parcelable
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+
         super.onSaveInstanceState(savedInstanceState);
+        
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
         savedInstanceState.putBooleanArray(KEY_Q, stateQuestion);
