@@ -19,7 +19,7 @@ public class QuizActivity extends AppCompatActivity {
     private ImageButton mPreviousButton;
     private TextView mQuestionTextView;
 
-    private Question[] mQuestionBank = new Question[] {
+    private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_australia, true),
             new Question(R.string.question_oceans, true),
             new Question(R.string.question_mideast, false),
@@ -30,10 +30,13 @@ public class QuizActivity extends AppCompatActivity {
 
     //Массив в котором хранится состояние блокировки или разблокировки кнопок ответов
     //Если пользователь нажал ответ то кнопка должна быть неактивна.
-    private  boolean[] stateQuestion = new boolean[mQuestionBank.length];
+    private boolean[] stateQuestion = new boolean[mQuestionBank.length];
 
     //Счетчик правильных ответов
     private int correctAnswerCounter = 0;
+
+    //Счетчик вопросов
+    private int questionCounter = mQuestionBank.length;
 
     private int mCurrentIndex = 0;
 
@@ -50,10 +53,10 @@ public class QuizActivity extends AppCompatActivity {
 
         //Если активити был воссоздан после уничтожения, востанавливаем значение что хранилось в mCurrentIndex на тот момент.
         if (savedInstanceState != null) {
-           stateQuestion = savedInstanceState.getBooleanArray(KEY_Q);
-           mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
-        }else {
-            for (int i=0; i<stateQuestion.length; i++){
+            stateQuestion = savedInstanceState.getBooleanArray(KEY_Q);
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        } else {
+            for (int i = 0; i < stateQuestion.length; i++) {
                 stateQuestion[i] = true;
             }
         }
@@ -91,7 +94,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
         mNextButton = findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener(){
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //mCurrentIndex = (mCurrentIndex+1) % mQuestionBank.length;
@@ -107,7 +110,7 @@ public class QuizActivity extends AppCompatActivity {
                 if (mCurrentIndex > 0) {
                     mCurrentIndex = (mCurrentIndex - 1);
                 } else {
-                    mCurrentIndex = mQuestionBank.length-1;
+                    mCurrentIndex = mQuestionBank.length - 1;
                 }
                 updateQuestion();
             }
@@ -123,8 +126,7 @@ public class QuizActivity extends AppCompatActivity {
         });
 
 
-    updateQuestion();
-
+        updateQuestion();
 
 
     }
@@ -134,11 +136,13 @@ public class QuizActivity extends AppCompatActivity {
         super.onStart();
         Log.d(TAG, "onStart() called");
     }
+
     @Override
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume() called");
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -161,6 +165,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onStop();
         Log.d(TAG, "onStop() called");
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -168,32 +173,34 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-    public void nextQuestion(){
-        mCurrentIndex = (mCurrentIndex+1) % mQuestionBank.length;
+    public void nextQuestion() {
+        mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
         updateQuestion();
     }
 
     //обновляем вопрос
-    private  void updateQuestion(){
+    private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
         getButtonState();
     }
 
     //проверка на правильность ответа
-    private void checkAnswer (boolean uuserPressedTrue){
+    private void checkAnswer(boolean uuserPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
 
-        if (uuserPressedTrue==answerIsTrue){
+        if (uuserPressedTrue == answerIsTrue) {
             messageResId = R.string.correct_toast;
             correctAnswerCounter++;
-        }else {
+        } else {
             messageResId = R.string.incorrect_toast;
         }
-        Toast.makeText(this,messageResId,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
         setButtonState();
         getButtonState();
+        finalMessage();
+
     }
 
     //Как только ответ на вопрос получен запрещаем нажимать на кнопку в этом вопросе
@@ -210,6 +217,16 @@ public class QuizActivity extends AppCompatActivity {
         mTrueButton.setEnabled(stateQuestion[mCurrentIndex]);
     }
 
+    //Метод проверяет что на все вопросы дан ответ и выводит сообщение с результатом
+    private void finalMessage (){
+        questionCounter--;
+        if (questionCounter == 0) {
 
+            String fMessage =getResources().getString(R.string.final_message);
+            float procent = mQuestionBank.length*correctAnswerCounter/100;
+            mQuestionTextView.setText(fMessage+" "+Float.toString(procent)+"%");
+            //Toast.makeText(this, fMessage+" "+procent+"%", Toast.LENGTH_LONG).show();
+        }
+    }
 
 }
