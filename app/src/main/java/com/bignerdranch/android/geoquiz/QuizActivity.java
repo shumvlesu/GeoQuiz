@@ -43,6 +43,8 @@ public class QuizActivity extends AppCompatActivity {
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
     private static final String KEY_Q = "indexStateQuestion";
+    private static final String KEY_QC = "index_questionCounter";
+    private static final String KEY_QAC = "index_correctAnswerCounter";
 
 
     @Override
@@ -53,8 +55,12 @@ public class QuizActivity extends AppCompatActivity {
 
         //Если активити был воссоздан после уничтожения, востанавливаем значение что хранилось в mCurrentIndex на тот момент.
         if (savedInstanceState != null) {
+
             stateQuestion = savedInstanceState.getBooleanArray(KEY_Q);
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            questionCounter = savedInstanceState.getInt(KEY_QC, 0);
+            correctAnswerCounter = savedInstanceState.getInt(KEY_QAC, 0);
+
         } else {
             for (int i = 0; i < stateQuestion.length; i++) {
                 stateQuestion[i] = true;
@@ -157,6 +163,9 @@ public class QuizActivity extends AppCompatActivity {
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
         savedInstanceState.putBooleanArray(KEY_Q, stateQuestion);
+        savedInstanceState.putInt(KEY_QC, questionCounter);
+        savedInstanceState.putInt(KEY_QAC, correctAnswerCounter);
+
     }
 
 
@@ -218,14 +227,14 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     //Метод проверяет что на все вопросы дан ответ и выводит сообщение с результатом
-    private void finalMessage (){
+    private void finalMessage() {
         questionCounter--;
         if (questionCounter == 0) {
 
-            String fMessage =getResources().getString(R.string.final_message);
-            int procent = ((correctAnswerCounter*100)/mQuestionBank.length);
-            mQuestionTextView.setText(fMessage+" "+Integer.toString(procent)+"%");
-            Toast.makeText(this, fMessage+" "+Integer.toString(procent)+"%", Toast.LENGTH_LONG).show();
+            String fMessage = getResources().getString(R.string.final_message);
+            int procent = ((correctAnswerCounter * 100) / mQuestionBank.length);
+            mQuestionTextView.setText(fMessage + " " + Integer.toString(procent) + "%");
+            Toast.makeText(this, fMessage + " " + Integer.toString(procent) + "%", Toast.LENGTH_LONG).show();
 
         }
     }
