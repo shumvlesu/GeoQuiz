@@ -235,7 +235,12 @@ public class QuizActivity extends AppCompatActivity {
         questionCounter--;
         if (questionCounter == 0) {
 
-            String fMessage = getResources().getString(R.string.final_message);
+            mNextButton.setVisibility(View.GONE);
+            mPreviousButton.setVisibility(View.GONE);
+            //mQuestionTextView.setEnabled(false);
+
+
+            String fMessage = getResources().getString(R.string.finalMessage);
             int procent = ((correctAnswerCounter * 100) / mQuestionBank.length);
             mQuestionTextView.setText(fMessage + " " + Integer.toString(procent) + "%");
             Toast.makeText(this, fMessage + " " + Integer.toString(procent) + "%", Toast.LENGTH_LONG).show();

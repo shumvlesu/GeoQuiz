@@ -16,5 +16,5 @@
     <string name="false_button">False</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
-    <string name="final_message">You answered correctly </string>
+    <string name="finalMessage">You answered correctly </string>
 </resources>

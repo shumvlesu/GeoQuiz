@@ -13,5 +13,5 @@
     <string name="false_button">Ложь</string>
     <string name="correct_toast">Правильно!</string>
     <string name="incorrect_toast">Неверно!</string>
-    <string name="final_message">Вы ответили правильно на </string>
+    <string name="finalMessage">Вы ответили правильно на </string>
 </resources>
