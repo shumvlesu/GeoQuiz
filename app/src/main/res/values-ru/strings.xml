@@ -14,4 +14,8 @@
     <string name="correct_toast">Правильно!</string>
     <string name="incorrect_toast">Неверно!</string>
     <string name="finalMessage">Вы ответили правильно на </string>
+    <string name="cheat_button">Читануть!</string>
+    <string name="judgment_toast">Читерить плохо.</string>
+    <string name="show_answer_button">Показать ответ</string>
+    <string name="warning_text">Вы действительно хотите это сделать?</string>
 </resources>
