@@ -17,6 +17,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private ImageButton mNextButton;
     private ImageButton mPreviousButton;
+    private Button mCheatButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[]{
@@ -67,9 +68,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         }
 
-        mQuestionTextView = findViewById(R.id.question_text_view);
-
-        //int question = mQuestionBank[mCurrentIndex].getTextResId();
+               //int question = mQuestionBank[mCurrentIndex].getTextResId();
         //mQuestionTextView.setText(question);
 
 
@@ -123,8 +122,17 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start CheatActivity
+            }
+        });
+
 
         //При нажатии на надпись (где вопрос написан)
+        mQuestionTextView = findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
