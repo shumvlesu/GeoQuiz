@@ -16,6 +16,8 @@ public class QuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
 
+
+
     private ImageButton mNextButton;
     private ImageButton mPreviousButton;
     private Button mCheatButton;
@@ -128,7 +130,9 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start CheatActivity
-                Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
+                //Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
                 startActivity(intent);
             }
         });
