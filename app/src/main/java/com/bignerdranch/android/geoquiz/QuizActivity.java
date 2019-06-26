@@ -122,7 +122,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mCheatButton = (Button)findViewById(R.id.cheat_button);
+        mCheatButton = findViewById(R.id.cheat_button);
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
