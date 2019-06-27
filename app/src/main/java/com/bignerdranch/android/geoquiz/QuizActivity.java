@@ -46,6 +46,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+    private static final int REQUEST_CODE_CHEAT = 0;
     private static final String KEY_Q = "indexStateQuestion";
     private static final String KEY_QC = "index_questionCounter";
     private static final String KEY_QAC = "index_correctAnswerCounter";
@@ -133,7 +134,9 @@ public class QuizActivity extends AppCompatActivity {
                 //Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
-                startActivity(intent);
+                //startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
+
             }
         });
 
