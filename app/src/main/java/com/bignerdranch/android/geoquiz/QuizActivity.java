@@ -1,5 +1,6 @@
 package com.bignerdranch.android.geoquiz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,6 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-
 
 
     private ImageButton mNextButton;
@@ -36,6 +36,8 @@ public class QuizActivity extends AppCompatActivity {
     //Если пользователь нажал ответ то кнопка должна быть неактивна.
     private boolean[] stateQuestion = new boolean[mQuestionBank.length];
 
+    private boolean[] triggerCheat = new boolean[mQuestionBank.length];
+
     //Счетчик правильных ответов
     private int correctAnswerCounter = 0;
 
@@ -50,6 +52,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_Q = "indexStateQuestion";
     private static final String KEY_QC = "index_questionCounter";
     private static final String KEY_QAC = "index_correctAnswerCounter";
+    private static final String KEY_TRIGGER= "TRIGGER_CHEATER";
 
 
     @Override
@@ -65,14 +68,14 @@ public class QuizActivity extends AppCompatActivity {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
             questionCounter = savedInstanceState.getInt(KEY_QC, 0);
             correctAnswerCounter = savedInstanceState.getInt(KEY_QAC, 0);
-
+            triggerCheat = savedInstanceState.getBooleanArray(KEY_TRIGGER);
         } else {
             for (int i = 0; i < stateQuestion.length; i++) {
                 stateQuestion[i] = true;
             }
         }
 
-               //int question = mQuestionBank[mCurrentIndex].getTextResId();
+        //int question = mQuestionBank[mCurrentIndex].getTextResId();
         //mQuestionTextView.setText(question);
 
 
@@ -109,6 +112,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //mCurrentIndex = (mCurrentIndex+1) % mQuestionBank.length;
                 //updateQuestion();
+                //mIsCheater = false;
                 nextQuestion();
             }
         });
@@ -122,6 +126,7 @@ public class QuizActivity extends AppCompatActivity {
                 } else {
                     mCurrentIndex = mQuestionBank.length - 1;
                 }
+                //mIsCheater = false;
                 updateQuestion();
             }
         });
@@ -157,6 +162,22 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE_CHEAT) {
+            if (data == null) {
+                return;
+            }
+
+            triggerCheat[mCurrentIndex] = CheatActivity.wasAnswerShown(data);
+
+        }
+    }
+
+
+    @Override
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart() called");
@@ -186,7 +207,7 @@ public class QuizActivity extends AppCompatActivity {
         savedInstanceState.putBooleanArray(KEY_Q, stateQuestion);
         savedInstanceState.putInt(KEY_QC, questionCounter);
         savedInstanceState.putInt(KEY_QAC, correctAnswerCounter);
-
+        savedInstanceState.putBooleanArray(KEY_TRIGGER, triggerCheat);
     }
 
 
@@ -214,6 +235,7 @@ public class QuizActivity extends AppCompatActivity {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
         getButtonState();
+
     }
 
     //проверка на правильность ответа
@@ -221,11 +243,15 @@ public class QuizActivity extends AppCompatActivity {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
 
-        if (uuserPressedTrue == answerIsTrue) {
-            messageResId = R.string.correct_toast;
-            correctAnswerCounter++;
+        if (triggerCheat[mCurrentIndex]) {
+            messageResId = R.string.judgment_toast;
         } else {
-            messageResId = R.string.incorrect_toast;
+            if (uuserPressedTrue == answerIsTrue) {
+                messageResId = R.string.correct_toast;
+                correctAnswerCounter++;
+            } else {
+                messageResId = R.string.incorrect_toast;
+            }
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
         setButtonState();
