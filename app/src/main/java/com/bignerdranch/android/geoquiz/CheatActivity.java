@@ -60,12 +60,14 @@ public class CheatActivity extends AppCompatActivity {
 
     }
 
+    //создаем интент с ответом для главной активности
     private void setAnswerShownResult() {
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
         setResult(RESULT_OK, data);
     }
 
+    //Возвращается в случае если активность не дала ответа. вызывается из главной активности.
     public static boolean wasAnswerShown(Intent result) {
         return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
     }
