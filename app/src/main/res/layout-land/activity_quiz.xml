@@ -1,13 +1,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
     <TextView
         android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-
+        android:textStyle="bold"
         android:padding="24dp" />
     <LinearLayout
     android:layout_width="wrap_content"
@@ -19,18 +20,21 @@
         android:id="@+id/true_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/true_button" />
+        android:text="@string/true_button"
+        android:backgroundTint="@color/colorButton"/>
     <Button
         android:id="@+id/false_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/false_button" />
+        android:text="@string/false_button"
+        android:backgroundTint="@color/colorButton"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left">
+        android:layout_gravity="bottom|left"
+        android:backgroundTint="@color/colorButton">
 
         <ImageButton
             android:id="@+id/previous_button"
@@ -38,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:contentDescription="@string/previous_button"
-            android:src="@drawable/left" />
+            android:src="@drawable/left"
+            android:backgroundTint="@color/colorButton"/>
 
         <ImageButton
             android:id="@+id/next_button"
@@ -46,7 +51,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:contentDescription="@string/next_button"
-            android:src="@drawable/right" />
+            android:src="@drawable/right"
+            android:backgroundTint="@color/colorButton"/>
 
     </LinearLayout>
 
@@ -55,7 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="@string/cheat_button" />
+        android:text="@string/cheat_button"
+        android:backgroundTint="@color/colorButton"/>
 
 
 </FrameLayout>

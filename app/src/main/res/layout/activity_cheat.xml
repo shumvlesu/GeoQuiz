@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.bignerdranch.android.geoquiz.CheatActivity">
+    tools:context="com.bignerdranch.android.geoquiz.CheatActivity"
+    android:background="@drawable/gradient_cheat">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:text="@string/warning_text"/>
+        android:text="@string/warning_text"
+        android:textStyle="bold"/>
     <TextView
         android:id="@+id/answer_text_view"
         android:layout_width="wrap_content"
@@ -20,5 +22,6 @@
         android:id="@+id/show_answer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_answer_button"/>
+        android:text="@string/show_answer_button"
+        android:backgroundTint="@color/colorButton"/>
 </LinearLayout>

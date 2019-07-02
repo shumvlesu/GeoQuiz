@@ -2,7 +2,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/gradient">
     <TextView
         android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
@@ -16,12 +17,14 @@
         android:id="@+id/true_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/true_button" />
+        android:text="@string/true_button"
+        android:backgroundTint="@color/colorButton"/>
     <Button
         android:id="@+id/false_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/false_button" />
+        android:text="@string/false_button"
+        android:backgroundTint="@color/colorButton"/>
     </LinearLayout>
 
     <LinearLayout
@@ -35,14 +38,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/left"
-            android:contentDescription="@string/previous_button"/>
+            android:contentDescription="@string/previous_button"
+            android:backgroundTint="@color/colorButton"/>
 
         <ImageButton
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/right"
-            android:contentDescription="@string/next_button"/>
+            android:contentDescription="@string/next_button"
+            android:backgroundTint="@color/colorButton"/>
 
     </LinearLayout>
 
@@ -50,7 +55,8 @@
         android:id="@+id/cheat_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cheat_button" />
+        android:text="@string/cheat_button"
+        android:backgroundTint="@color/colorButton"/>
 
     <TextView
         android:id="@+id/api_level"
