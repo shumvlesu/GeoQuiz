@@ -18,4 +18,5 @@
     <string name="judgment_toast">Читерить плохо.</string>
     <string name="show_answer_button">Показать ответ</string>
     <string name="warning_text">Вы действительно хотите это сделать?</string>
+    <string name="apiLevel">"API версия вашей ОС - "</string>
 </resources>

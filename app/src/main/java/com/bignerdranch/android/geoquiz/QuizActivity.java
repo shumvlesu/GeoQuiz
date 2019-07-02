@@ -2,6 +2,7 @@ package com.bignerdranch.android.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.view.Gravity;
@@ -77,6 +78,8 @@ public class QuizActivity extends AppCompatActivity {
         //int question = mQuestionBank[mCurrentIndex].getTextResId();
         //mQuestionTextView.setText(question);
 
+        TextView mApiLevel = findViewById(R.id.api_level);
+        mApiLevel.setText( getResources().getString(R.string.apiLevel)+String.valueOf(Build.VERSION.SDK_INT));
 
         mTrueButton = findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {

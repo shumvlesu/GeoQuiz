@@ -52,4 +52,10 @@
         android:layout_height="wrap_content"
         android:text="@string/cheat_button" />
 
+    <TextView
+        android:id="@+id/api_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
 </LinearLayout>
