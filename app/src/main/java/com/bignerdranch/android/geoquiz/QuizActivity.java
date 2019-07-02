@@ -20,7 +20,6 @@ public class QuizActivity extends AppCompatActivity {
 
     private ImageButton mNextButton;
     private ImageButton mPreviousButton;
-    private Button mCheatButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[]{
@@ -131,8 +130,8 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mCheatButton = findViewById(R.id.cheat_button);
-        mCheatButton.setOnClickListener(new View.OnClickListener() {
+        Button cheatButton = findViewById(R.id.cheat_button);
+        cheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start CheatActivity
@@ -241,7 +240,8 @@ public class QuizActivity extends AppCompatActivity {
     //проверка на правильность ответа
     private void checkAnswer(boolean uuserPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
-        int messageResId = 0;
+        //int messageResId = 0;
+        int messageResId;
 
         if (triggerCheat[mCurrentIndex]) {
             messageResId = R.string.judgment_toast;
@@ -286,8 +286,8 @@ public class QuizActivity extends AppCompatActivity {
 
             String fMessage = getResources().getString(R.string.finalMessage);
             int procent = ((correctAnswerCounter * 100) / mQuestionBank.length);
-            mQuestionTextView.setText(fMessage + " " + Integer.toString(procent) + "%");
-            Toast.makeText(this, fMessage + " " + Integer.toString(procent) + "%", Toast.LENGTH_LONG).show();
+            mQuestionTextView.setText(fMessage + " " + procent + "%");
+            Toast.makeText(this, fMessage + " " + procent + "%", Toast.LENGTH_LONG).show();
 
         }
     }
