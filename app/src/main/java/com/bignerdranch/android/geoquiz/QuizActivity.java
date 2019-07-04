@@ -56,11 +56,13 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_TRIGGER= "TRIGGER_CHEATER";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
+
 
 
         //Если активити был воссоздан после уничтожения, востанавливаем значение что хранилось в mCurrentIndex на тот момент.

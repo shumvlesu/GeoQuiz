@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context="com.bignerdranch.android.geoquiz.CheatActivity"
-    android:background="@drawable/gradient_cheat">
+    android:background="@drawable/gradient_cheat"
+    android:theme="@style/AppTheme">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

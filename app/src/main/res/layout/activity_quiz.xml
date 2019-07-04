@@ -3,13 +3,16 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    android:theme="@style/AppTheme">
+
     <TextView
         android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:padding="24dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
     <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
